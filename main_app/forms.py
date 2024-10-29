@@ -1,16 +1,10 @@
 from django import forms
-from .models import Feeding
+from .models import Music
 
-class FeedingForm(forms.ModelForm):
+class MusicForm(forms.ModelForm):
     class Meta:
-        model = Feeding
-        fields = ['date', 'meal']
+        model = Music
+        fields = ['date', 'music_name']
         widgets = {
-            'date': forms.DateInput(
-                format=('%Y-%m-%d'),
-                attrs={
-                    'placeholder': 'Select a date',
-                    'type': 'date'
-                }
-            ),
+            'date': forms.DateInput(attrs={'type': 'date'}),
         }

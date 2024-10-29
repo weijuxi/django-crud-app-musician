@@ -1,23 +1,23 @@
 from django.shortcuts import redirect, render
-from .models import Cat
+from .models import Musician
 from django.http import HttpResponse
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from .forms import FeedingForm
+from .forms import MusicForm
 # Create your views here.
 
-class CatCreate(CreateView):
-    model = Cat
+class MusicianCreate(CreateView):
+    model = Musician
     fields = '__all__'
-    success_url = '/cats/'
+    success_url = '/musicians/'
     
-class CatUpdate(UpdateView):
-    model = Cat
+class MusicianUpdate(UpdateView):
+    model = Musician
     # Let's disallow the renaming of a cat by excluding the name field!
-    fields = ['breed', 'description', 'age']
+    fields = ['description', 'age']
 
-class CatDelete(DeleteView):
-    model = Cat
-    success_url = '/cats/'
+class MusicianDelete(DeleteView):
+    model = Musician
+    success_url = '/musicians/'
 
 def home(request):
     return render(request, 'home.html')
@@ -25,21 +25,21 @@ def home(request):
 def about(request):
     return render(request, 'about.html')
 
-def cats_index(request):
+def musicians_index(request):
     #search psql all cats
-    cats = Cat.objects.all()
-    return render(request, 'cats/index.html', {'cats': cats})
+    musician = Musician.objects.all()
+    return render(request, 'musicians/index.html', {'musicians': musician})
 
 
-def cats_detail(request, cat_id):
-    cats = Cat.objects.get(id=cat_id)
-    feeding_form = FeedingForm()
-    return render(request, 'cats/detail.html', {'cat': cats, 'feeding_form': feeding_form})
+def musicians_detail(request, musician_id):
+    musician = Musician.objects.get(id=musician_id)
+    music_form = MusicForm()
+    return render(request, 'musicians/detail.html', {'musician': musician, 'music_form': music_form})
 
-def add_feeding(request, cat_id):
-    form = FeedingForm(request.POST)
+def add_music(request, musician_id):
+    form = MusicForm(request.POST)
     if form.is_valid():
-        new_feeding = form.save(commit=False)
-        new_feeding.cat_id = cat_id
-        new_feeding.save()
-    return redirect('cat-detail', cat_id=cat_id)
+        new_music = form.save(commit=False)
+        new_music.musician_id =  musician_id
+        new_music.save()
+    return redirect('musician-detail', musician_id = musician_id)

@@ -9,9 +9,8 @@ MEALS = (
         ('D', 'Dinner')
 )
 
-class Cat(models.Model):
+class Musician(models.Model):
     name = models.CharField(max_length=100)
-    breed = models.CharField(max_length=100)
     description = models.TextField(max_length=250)
     age = models.IntegerField()
     
@@ -21,21 +20,17 @@ class Cat(models.Model):
     
     def get_absolute_url(self):
         # Use the 'reverse' function to dynamically find the URL for viewing this cat's details
-        return reverse('cat-detail', kwargs={'cat_id': self.id})
+        return reverse('musician-detail', kwargs={'musician_id': self.id})
     
 
-class Feeding(models.Model):
+class Music(models.Model):
         date = models.DateField()
-        meal = models.CharField(
-                max_length=1,
-                choices=MEALS,
-                default=MEALS[0][0]
-            )
+        music_name = models.CharField(max_length=100)
         
-        cat = models.ForeignKey(Cat, on_delete=models.CASCADE) # if the cat is deleted, delete associated feedings
+        musician = models.ForeignKey(Musician, on_delete=models.CASCADE)
         
         def __str__(self):
-            return f"{self.get_meal_display()} on {self.date}"
+            return self.music_name
         
         class Meta:
             ordering = ['-date']
