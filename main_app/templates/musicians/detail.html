@@ -6,7 +6,7 @@
 {% block content %}
 <section class="cat-container">
   <div class="cat-img">
-    <img src="{% static 'images/sk8r-boi-cat.svg' %}" alt="A skater boy cat" />
+    
   </div>
   <div class="cat-details">
     <h1>{{ musician.name }}</h1>
@@ -26,15 +26,7 @@
   <section class="feedings">
     <div class="subsection-title">
       <h2>Musics</h2>
-      <img
-        src="{% static 'images/cat-cone.svg' %}"
-        alt="An ice cream cone cat"
-      />
-      <img src="{% static 'images/cat-onigiri.svg' %}" alt="A cat as onigiri" />
-      <img
-        src="{% static 'images/kitty-kabob.svg' %}"
-        alt="A kabob of kittens"
-      />
+      
     </div>
       <h3>Add a Music</h3>
       <form action="{% url 'add-music' musician.id %}" method="post" class="subsection-content" autocomplete="off">
